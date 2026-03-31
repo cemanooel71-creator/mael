@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduReels - Aprenda e Ganhe</title>
+    <style>
+        :root { --p: #ff5722; --d: #000; --w: #fff; }
+        body { font-family: sans-serif; background: var(--d); color: var(--w); margin: 0; }
+        .top { position: fixed; top: 0; width: 100%; padding: 15px; display: flex; justify-content: space-between; z-index: 10; background: rgba(0,0,0,0.5); box-sizing: border-box; }
+        .coins { background: var(--p); padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+        .feed { height: 100vh; overflow-y: scroll; snap-type: y mandatory; }
+        .reel { height: 100vh; snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid #222; }
+        .video-box { width: 100%; height: 80%; background: #1a1a1a; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; }
+        .info { position: absolute; bottom: 80px; left: 20px; text-shadow: 1px 1px 5px #000; }
+        .shop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #121212; z-index: 100; display: none; padding: 20px; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .item { background: #222; padding: 15px; border-radius: 10px; text-align: center; }
+        button { background: var(--p); border: none; color: #fff; padding: 10px; width: 100%; border-radius: 5px; margin-top: 10px; cursor: pointer; }
+        nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 15px 0; border-top: 1px solid #333; }
+    </style>
+</head>
+<body>
+
+    <div class="top">
+        <span style="color:var(--p); font-weight:bold;">EduReels</span>
+        <div class="coins">🪙 <span id="val">0</span></div>
+    </div>
+
+    <div class="feed" id="f">
+        <div class="reel">
+            <div class="video-box" onclick="earn(10)">
+                <span>▶️ CLIQUE PARA ASSISTIR AULA</span>
+                <small>(Ganhe 10 moedas)</small>
+            </div>
+            <div class="info"><h3>Aula 01: Introdução</h3><p>Aprenda o básico em 30s</p></div>
+        </div>
+        <div class="reel">
+            <div class="video-box" onclick="earn(15)">
+                <span>▶️ CLIQUE PARA ASSISTIR AULA</span>
+                <small>(Ganhe 15 moedas)</small>
+            </div>
+            <div class="info"><h3>Aula 02: Avançado</h3><p>Dicas de mestre</p></div>
+        </div>
+    </div>
+
+    <div class="shop" id="s">
+        <h2>Trocar Moedas</h2>
+        <div class="grid">
+            <div class="item">🎁 <h4>Certificado</h4> <p>50 Moedas</p> <button onclick="buy(50)">Trocar</button> </div>
+            <div class="item">📚 <h4>E-book</h4> <p>100 Moedas</p> <button onclick="buy(100)">Trocar</button> </div>
+        </div>
+        <button onclick="view(0)" style="background:#444; margin-top:30px;">Voltar</button>
+    </div>
+
+    <nav>
+        <div onclick="view(0)">Início</div>
+        <div onclick="view(1)">🎁 Recompensas</div>
+    </nav>
+
+    <script>
+        let c = 0;
+        function earn(v) { c += v; document.getElementById('val').innerText = c; alert("Você ganhou " + v + " moedas por estudar!"); }
+        function view(x) { document.getElementById('s').style.display = x ? 'block' : 'none'; }
+        function buy(p) { 
+            if(c >= p) { c -= p; document.getElementById('val').innerText = c; alert("Prêmio resgatado!"); } 
+            else { alert("Assista mais vídeos para ganhar moedas!"); }
+        }
+    </script>
+</body>
+</html>
